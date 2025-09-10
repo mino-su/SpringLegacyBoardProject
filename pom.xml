@@ -132,7 +132,12 @@
             <artifactId>aspectjrt</artifactId>
             <version>1.9.22</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>6.2.6</version>
+        </dependency>
     </dependencies>
 
     <build>

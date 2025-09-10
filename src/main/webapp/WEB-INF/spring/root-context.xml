@@ -5,6 +5,7 @@
 
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
 
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
@@ -15,13 +16,15 @@
        http://mybatis.org/schema/mybatis-spring
        http://mybatis.org/schema/mybatis-spring.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd ">
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd ">
 
     <context:component-scan base-package="org.delivery.demo1.service"/>
 
     <bean name="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3308"/>
+        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3308/springdb"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
         <property name="connectionTimeout" value="30000"/>
@@ -33,6 +36,10 @@
         <constructor-arg ref="hikariConfig"/>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:/mapper/*.xml"/>
@@ -42,4 +49,5 @@
 
     <context:component-scan base-package="org.delivery.demo1.aop"></context:component-scan>
     <aop:aspectj-autoproxy/>
+    <tx:annotation-driven/>
 </beans>
