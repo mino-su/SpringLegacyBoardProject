@@ -19,7 +19,7 @@ class TestServiceTest {
 
     @Test
     public void testAll() {
-//        String str = "Alice was beginning to get very tired of sirring by her sister on the bank, and of having nothing todo";
+//        String str = "Alice was beginning to get very tired of sirring by her sister on the bank, and of having nothing";
 //        testService.insertAll(str);
 
         log.info("is Proxy? " + AopUtils.isAopProxy(testService));
