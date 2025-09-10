@@ -1,4 +1,4 @@
-# SpringRegacyBoardProject
+# SpringLegacyBoardProject
 
 ⚙️ 스프링 레거시 기본 게시판 프로젝트
 
