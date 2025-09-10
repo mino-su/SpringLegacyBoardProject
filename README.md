@@ -20,6 +20,32 @@
 |R8|게시글 댓글|3| - |조회 화면에서 처리|
 |R9|게시글 파일첨부|3| - |게시물의 목록에도 파일이 있는것을 알수있도록 처리|
 
+<br>
+<br>
+
+
+|기능|경로|방식|화면,컨트롤러|리다이렉트|
+|--------|-------------------------|----|-------------------|-----------|
+|게시글 등록| /borad/register |GET| /views/board/register.jsp ||
+|게시글 등록| /borad/register |POST| BoardController | /board/list |
+|게시글 목록| /borad/list |GET| /views/board/list.jsp ||
+|게시글 상세 조회| /borad/read/{number} |GET| /views/board/read.jsp ||
+|게시글 수정| /borad/modify/{number} |GET| /views/board/modify.jsp ||
+|게시글 수정| /borad/modify/{number} |POST| BoardController | /board/read/{number} |
+|게시글 삭제| /borad/remove/{number} |POST| BoardController | /board/list |
+
+
+### tbl_board
+|컬럼명|타입(길이)|제약조건|설명|기본값|PK|
+|--------|-------------|---------------|------------------|---------|------|
+|bno|int|auto_increment|게시물 번호(자동생성, PK)||PK|
+|title|varchar(500)|not_null|게시물 제목|||
+|content|varchar(2000)|not_null|게시물 내용|||
+|writer|varchar(50)|not_null|게시물 작성 아이디|||
+|regdate|timestamp||작성시간|now()||
+|updatedate|timestamp||최종 수정 시간|now()||
+|delflag|boolean||삭제여부|false||
+
 
 ### 게시물 
 * VO / DTO
