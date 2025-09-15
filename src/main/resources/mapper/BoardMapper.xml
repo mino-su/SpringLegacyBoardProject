@@ -21,7 +21,7 @@
 
     <update id="update">
         UPDATE tb1_board
-        SET title = #{title}, content = #{content}, updatedate = now(), delflag= #{delFlag}
+        SET title = #{title}, content = #{content}, updateDate = now(), delFlag= #{delFlag}
         WHERE bno = #{bno}
     </update>
 
@@ -29,5 +29,16 @@
         SELECT bno, title, writer, regDate FROM tb1_board
         WHERE delFlag =  false
         ORDER BY bno desc
+    </select>
+    <select id="list2" resultType="BoardDTO">
+        SELECT bno, title ,writer, regDate
+        FROM tb1_board
+        WHERE delFlag = false
+        ORDER BY bno desc
+        LIMIT #{count} OFFSET #{skip}
+    </select>
+
+    <select id="listCount" resultType="int">
+        SELECT count(bno) FROM tb1_board where delFlag = false
     </select>
 </mapper>

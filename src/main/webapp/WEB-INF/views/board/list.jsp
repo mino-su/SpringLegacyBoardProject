@@ -26,7 +26,7 @@
                     </tr>
                     </thead>
                     <tbody class="tbody">
-                    <c:forEach var="board" items="${list}">
+                    <c:forEach var="board" items="${dto.boardDTOList}">
                         <tr data-bno="${board.bno}">
                             <td>
                                 <a href="/board/read/${board.bno}">
@@ -41,6 +41,29 @@
                     </c:forEach>
                     </tbody>
                 </table>
+
+                <div class="d-flex justify-content-center">
+                    <ul class="pagination">
+                        <c:if test="${dto.prev}">
+                            <li class="page-item">
+                                <a class="page-link" href="${dto.start - 1}" tabindex="-1">Previous</a>
+                            </li>
+                        </c:if>
+
+                        <c:forEach var="num" items="${dto.pageNums}">
+                            <li class="page-item ${dto.page == num ? 'active':''}">
+                                <a class="page-link" href="${num}"> ${num}</a>
+                            </li>
+                        </c:forEach>
+
+                        <c:if test="${dto.next}">
+                            <li class="page-item">
+                                <a class="page-link" href="${dto.end + 1}">Next</a>
+                            </li>
+                        </c:if>
+                    </ul>
+
+                </div>
             </div>
         </div>
     </div>
@@ -79,6 +102,27 @@
     if(result){
         myModal.show()
     }
+
+
+    const pagingDiv = document.querySelector(".pagination")
+
+    pagingDiv.addEventListener("click",(e)=>{
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        const target = e.target
+        //console.log(target)
+
+        const targetPage = target.getAttribute("href")
+
+        const size = ${dto.size} || 10 // BoardListPagingDt의 size
+
+        const params = new URLSearchParams({
+            page: targetPage,
+            size: size
+        });
+
+        self.location = `/board/list?\${params.toString()}` // JavaScript 백틱, 템플릿
+    },false)
 
 </script>
 
